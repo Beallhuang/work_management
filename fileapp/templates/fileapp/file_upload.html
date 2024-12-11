@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>上传文件：</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/jquery-3.5.1.slim.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <style>
+        body {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">上传到 {{ current_path }}</h1>
+        
+        <form method="post" enctype="multipart/form-data" class="mb-4">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="file" name="file" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Upload</button>
+        </form>
+        
+        {% if sub_path %}
+            <p><a href="{% url 'file_list_subpath' directory.id sub_path %}" class="btn btn-secondary">返回上一级目录</a></p>
+        {% else %}
+            <p><a href="{% url 'file_list' directory.id %}" class="btn btn-secondary">返回上一级目录</a></p>
+        {% endif %}
+    </div>
+
+</body>
+</html>

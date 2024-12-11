@@ -1,0 +1,14 @@
+{% if item.type == "directory" %}
+    <li>
+        <strong>{{ item.name }}/</strong>
+        {% if item.children %}
+            <ul>
+                {% for child in item.children %}
+                    {% include "fileapp/_item.html" with item=child %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </li>
+{% else %}
+    <li><a href="{{ item.path }}" download>{{ item.name }}</a></li>
+{% endif %}
