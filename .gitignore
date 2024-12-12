@@ -1,1 +1,6 @@
 belle_management/db_config.py
+*pyc
+*log
+__pycache__/
+*pid
+*/__pycache__/
