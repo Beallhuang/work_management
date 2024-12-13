@@ -10,7 +10,9 @@ import os
 from django.core.asgi import get_asgi_application
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
-from live_refund_monitor.routing import websocket_urlpatterns
+from django.urls import path, re_path
+from live_refund_monitor.consumers import CommandConsumer
+from index_change.consumers import ChatConsumer
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'belle_management.settings')
 
@@ -18,7 +20,10 @@ application = ProtocolTypeRouter({
     "http": get_asgi_application(),
     "websocket": AuthMiddlewareStack(
         URLRouter(
-            websocket_urlpatterns  # WebSocket 路由
+            [
+                re_path(r'ws/chatbot/$', ChatConsumer.as_asgi()),
+                re_path(r'ws/command/$', CommandConsumer.as_asgi()),
+            ]
         )
     ),
 })

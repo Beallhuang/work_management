@@ -1,7 +1,6 @@
-# read_excel/urls.py
 from django.urls import path
-from .views import jdsz_index_change_view
+from django.views.generic import TemplateView
 
 urlpatterns = [
-    # path('jdsz_index/', jdsz_index_change_view, name='jdsz_index'),
+    path('chatbot/', TemplateView.as_view(template_name='index_change/chat.html')),
 ]

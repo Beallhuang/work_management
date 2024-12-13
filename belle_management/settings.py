@@ -32,7 +32,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-rc(nbc8a=+%&vr(fv3+fdlo37cgqf%avsc^312dt2d+yv5(!14"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False   
+DEBUG = True   
 
 ALLOWED_HOSTS = ['*']
 
@@ -86,7 +86,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "belle_management.wsgi.application"
+
+WSGI_APPLICATION = 'belle_management.wsgi.application'
+ASGI_APPLICATION = 'belle_management.asgi.application'
 
 
 # Database
@@ -134,10 +136,9 @@ USE_TZ = False
 
 STATIC_URL = "/static/"
 # BASE_DIR 是项目的绝对地址
-# STATIC_ROOT = os.path.join(BASE_DIR, 'collect_static')
-STATIC_ROOT = '/home/huang.biao/http_app/Django/belle_management/collect_static'
+STATIC_ROOT = os.path.join(BASE_DIR, 'collect_static')
 # STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, STATIC_URL),
+#     os.path.join(BASE_DIR, 'collect_static'),
 # ]
 
 # # Default primary key field type
@@ -178,3 +179,9 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+
+# 反向代理
+INSTALLED_APPS += ['revproxy.apps.RevProxyConfig']
+OPENAI_API_KEY=openai_api_key
+OPENAI_API_URL=openai_base_url

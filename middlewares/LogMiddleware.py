@@ -75,7 +75,7 @@ class OpLogs(MiddlewareMixin):
         except (AttributeError, UnicodeDecodeError):
             rp_content = None
         
-        self.data['rp_content'] = rp_content
+        self.data['rp_content'] = None
 
         # 耗时
         self.end_time = time.time()  # 响应时间

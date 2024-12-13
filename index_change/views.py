@@ -50,4 +50,6 @@ def jdsz_index_change_view(request):
     else:
         form = ExcelForm()
 
-    return render(request, 'jdsz_index.html', {'form': form})
+    return render(request, 'index_change/jdsz_index.html', {'form': form})
+
+
