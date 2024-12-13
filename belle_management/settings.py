@@ -183,5 +183,3 @@ CHANNEL_LAYERS = {
 
 # 反向代理
 INSTALLED_APPS += ['revproxy.apps.RevProxyConfig']
-OPENAI_API_KEY=openai_api_key
-OPENAI_API_URL=openai_base_url

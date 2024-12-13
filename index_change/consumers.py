@@ -4,11 +4,10 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 import openai
 from openai import OpenAI
 from django.conf import settings
-openai.api_key = os.getenv('OPENAI_API_KEY')
-# openai.api_key = 'sk-JSGqHabFGLLqpe7t91Ee2aE58f4548E080E9D81d900802F5'
+from belle_management.db_config import openai_api_key, openai_base_url
 
 
-client = OpenAI(api_key=settings.OPENAI_API_KEY, base_url=settings.OPENAI_API_URL)
+client = OpenAI(api_key=openai_api_key, base_url=openai_base_url)
 
 def predict(message, history):
     history_openai_format = []
