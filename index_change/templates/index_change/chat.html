@@ -27,6 +27,7 @@
             overflow-y: auto;
             background: #f9f9f9;
             padding: 20px;
+            word-wrap: break-word;
         }
 
         .message {
@@ -38,17 +39,22 @@
             max-width: 75%;
             word-wrap: break-word;
         }
+		.message.user {
+			background-color: #ffb300;
+			color: white;
+			text-align: left;
+			margin-left: auto;
+			border-radius: 10px 10px 0 10px;
+			max-width: 75%; /* Ensure it doesn't take the full width */
+			word-wrap: break-word; /* Allows long words to break */
+			white-space: normal; /* Ensures multiline text wrapping */
+			padding: 10px; /* Adds padding for better readability */
+		}
 
-        .message.user {
-            background-color: #007bff;
-            color: white;
-            text-align: left;
-            margin-left: auto;
-            border-radius: 10px 10px 0 10px;
-        }
+		/* Other CSS remains unchanged */
 
         .message.gpt {
-            background-color: #78c2ad;
+            background-color: #0b110f;
             color: white;
             text-align: left;
             margin-right: auto;
@@ -75,7 +81,10 @@
             font-size: 14px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            margin-right: 10px;
+            resize: none; /* 禁用 textarea 的拖拽调整大小 */
+            height: 60px; /* 设置默认高度 */
+            line-height: 1.5; /* 调整行高 */
+            overflow-y: auto; /* 启用垂直滚动 */
         }
 
         button {
@@ -101,7 +110,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
-            const socket = new WebSocket('ws://127.0.0.1:8000/ws/chatbot/');
+            const socket = new WebSocket('ws://10.250.19.38/ws/chatbot/');
             const chatLog = document.querySelector('#chat-log');
             const chatMessage = document.querySelector('#chat-message');
             let currentResponse = '';
@@ -169,7 +178,7 @@
     <div id="chat-container">
         <div id="chat-log"></div>
         <div id="input-container">
-            <input id="chat-message" type="text" placeholder="Type your message here...">
+            <textarea id="chat-message" placeholder="Type your message here..."></textarea>
             <button>Send</button>
         </div>
     </div>

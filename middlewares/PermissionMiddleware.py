@@ -25,11 +25,11 @@ class PermissionMiddleware:
             return redirect(f'{self.login_url}?next={path}')
         
         # 权限检查    
-        if re.search('upload', path) and not request.user.has_perm('fileapp.add_filemanage'):
+        if re.search('fileapp.*upload', path) and not request.user.has_perm('fileapp.add_filemanage'):
             return HttpResponse('You do not have permission to upload files.')    
-        if re.search('download', path) and not request.user.has_perm('fileapp.change_filemanage'):
+        if re.search('fileapp.*download', path) and not request.user.has_perm('fileapp.change_filemanage'):
             return HttpResponse('You do not have permission to download files.')    
-        if re.search('delete', path) and not request.user.has_perm('fileapp.delete_filemanage'):
+        if re.search('fileapp.*delete', path) and not request.user.has_perm('fileapp.delete_filemanage'):
             return HttpResponse('You do not have permission to delete files.')   
 
         response = self.get_response(request)

@@ -32,7 +32,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-rc(nbc8a=+%&vr(fv3+fdlo37cgqf%avsc^312dt2d+yv5(!14"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True   
+DEBUG = False   
 
 ALLOWED_HOSTS = ['*']
 
@@ -154,9 +154,9 @@ SIMPLEUI_HOME_INFO = False
 SIMPLEUI_ANALYSIS = False
 
 # 设置右上角Home图标跳转链接，以另外一个窗口打开
-SIMPLEUI_INDEX = 'http://127.0.0.1:8000/admin'
+SIMPLEUI_INDEX = 'http://10.250.19.38/admin'
 
-SIMPLEUI_LOGO = 'http://127.0.0.1:8000/static/admin/img/logo.jpg'
+SIMPLEUI_LOGO = 'http://10.250.19.38/static/admin/img/logo.jpg'
 
 
 

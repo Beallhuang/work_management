@@ -32,7 +32,7 @@
   <div id="output"></div>
 
   <script>
-    const socket = new WebSocket('ws://127.0.0.1:8000/ws/command/');
+    const socket = new WebSocket('ws://10.250.19.38/ws/command/');
     const outputDiv = document.getElementById('output');
 
     socket.onmessage = function(event) {
