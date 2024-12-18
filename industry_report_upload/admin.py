@@ -10,7 +10,10 @@ class UploadFileTemplateAdmin(admin.ModelAdmin):
 
     @admin.action(description='开始手动上传报告')
     def upload_files(self, request, queryset):
-        return HttpResponseRedirect('/live_refund_monitor/command/')
+        # 从queryset中取出id，并拼接成命令行参数
+        ids = ','.join(str(i.id) for i in queryset)
+        params = f"/home/huang.biao/anaconda3/bin/python /home/huang.biao/anaconda3/lib/python3.9/site-packages/base_function/industry_report_center/main.py --ids {ids}"
+        return HttpResponseRedirect(f'/live_refund_monitor/command/?run_param={params}')
 
     # 显示字段
     @admin.display(description='封面图模板')

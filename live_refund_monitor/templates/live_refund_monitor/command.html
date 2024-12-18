@@ -19,21 +19,33 @@
       height: 400px;
       overflow-y: auto;
     }
+
+    button {
+        font-size: 18px; /* 增加字体大小 */
+        padding: 10px 20px; /* 增加内边距 */
+        background-color: #007BFF; /* 按钮背景色 */
+        color: white; /* 字体颜色 */
+        border: none; /* 移除边框 */
+        border-radius: 5px; /* 圆角边框 */
+        cursor: pointer; /* 鼠标悬停时显示为手型 */
+        transition: background-color 0.3s; /* 添加过渡效果 */
+    }
+
+    button:hover {
+        background-color: #0056b3; /* 悬停时改变按钮背景色 */
+    }
   </style>
 </head>
 <body>
   <h1>运行 Linux 命令</h1>
-  <!-- <input type="text" id="command" placeholder="输入 Linux 命令" style="width: 80%;" value="cd /home/huang.biao/jupyter_data/refund_monitor/python && /home/huang.biao/anaconda3/bin/python refund_monitor_tm_item_multiply_v241128.py"/> -->
-  <select id="command" style="width: 80%;">
-    <option value="cd /home/huang.biao/jupyter_data/refund_monitor/python && /home/huang.biao/anaconda3/bin/python refund_monitor_tm_item_multiply_v241128.py">输出直播退货报告</option>
-    <option value="/home/huang.biao/anaconda3/bin/python /home/huang.biao/anaconda3/lib/python3.9/site-packages/base_function/industry_report_center/main.py" selected>报告中心报告上传</option>
-  </select>
   <button onclick="runCommand()">运行</button>
   <div id="output"></div>
 
   <script>
     const socket = new WebSocket('ws://10.250.19.38/ws/command/');
     const outputDiv = document.getElementById('output');
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialCommand = urlParams.get('run_param'); // 默认值为 'ls'
 
     socket.onmessage = function(event) {
       outputDiv.textContent += event.data + '\n'; // 显示命令输出
@@ -41,11 +53,7 @@
     };
 
     function runCommand() {
-      const selectElement = document.getElementById('command');
-      let command = selectElement.value.trim(); // 获取用户输入的命令
-      if (!command) {
-        command = 'ls'; // 设置默认值，比如列出当前目录
-      }
+      let command = initialCommand.trim(); // 获取用户输入的命令
       outputDiv.textContent = ''; // 清空之前的输出
       socket.send(command); // 将命令发送到服务器
     }

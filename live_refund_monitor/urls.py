@@ -1,6 +1,6 @@
 from django.urls import path
-from django.views.generic import TemplateView
+from .views import CommandView  # 导入自定义的视图
 
 urlpatterns = [
-    path('command/', TemplateView.as_view(template_name='live_refund_monitor/command.html')),
+    path('command/', CommandView.as_view(), name='command'),
 ]

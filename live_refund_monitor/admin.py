@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import ItemInfoLive, OutputRecord
+from django.template.response import TemplateResponse
 
 # Register your models here.
 @admin.register(ItemInfoLive)
@@ -17,4 +18,5 @@ class ItemInfoLiveAdmin(admin.ModelAdmin):
 class OutputRecordAdmin(admin.ModelAdmin):
     
     def changelist_view(self, request, extra_context = ...):
-        return HttpResponseRedirect('/live_refund_monitor/command/')
+        params = "cd /home/huang.biao/jupyter_data/refund_monitor/python && /home/huang.biao/anaconda3/bin/python refund_monitor_tm_item_multiply_v241128.py"
+        return HttpResponseRedirect(f'/live_refund_monitor/command/?run_param={params}')

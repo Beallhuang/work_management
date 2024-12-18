@@ -139,7 +139,7 @@
                 // 创建用户消息 div
                 const userMessageDiv = document.createElement('div');
                 userMessageDiv.className = 'message user';
-                userMessageDiv.textContent = 'You: ' + message;
+                userMessageDiv.innerHTML = 'You: <pre>' + message.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</pre>';
                 chatLog.appendChild(userMessageDiv);
 
                 // 创建 GPT 消息 div
