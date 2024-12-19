@@ -1,6 +1,7 @@
 import asyncio
 from channels.generic.websocket import AsyncWebsocketConsumer
 import subprocess
+from urllib.parse import unquote
 
 class CommandConsumer(AsyncWebsocketConsumer):
     async def connect(self):
@@ -11,7 +12,8 @@ class CommandConsumer(AsyncWebsocketConsumer):
 
     async def receive(self, text_data):
         # 接收到客户端消息，运行 Linux 命令
-        command = text_data.strip()
+        command = unquote(text_data.strip())
+        print(f'Received command: {command}')
         process = await asyncio.create_subprocess_shell(
             command,
             stdout=asyncio.subprocess.PIPE,
